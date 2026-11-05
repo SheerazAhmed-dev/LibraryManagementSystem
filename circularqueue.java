@@ -1,17 +1,18 @@
 //enqueue, dequeue, peek, isEmpty, isFull, size, display
 
 class circularqueue<T> {
-    Object array[];
+    T array[];
     int front;
     int rear = -1;
     int capacity;
     int size;
 
+    @SuppressWarnings("unchecked")
     circularqueue() {
 
         this.capacity = 10;
 
-        array = new Object[capacity];
+        array = (T[]) new Object[capacity];
         this.size = 0;
         this.front = 0;
     }
@@ -21,14 +22,14 @@ class circularqueue<T> {
         return size == 0;
     }
 
-    boolean isfull() {
+    boolean isFull() {
 
         return size == capacity;
 
     }
 
     void enqueue(T data) {
-        if (isfull()) {
+        if (isFull()) {
             resize();
         }
 
@@ -39,7 +40,7 @@ class circularqueue<T> {
 
     void resize() {
         int newcapacity = capacity * 2;
-        Object newarray[] = new Object[newcapacity];
+        T[] newarray = (T[]) new Object[newcapacity];
         for (int i = 0; i < size; i++) {
             newarray[i] = array[(front + i) % capacity]; // push ta kayo new arraay mey
         }
@@ -52,10 +53,11 @@ class circularqueue<T> {
 
     T dequeue() {
         if (isEmpty()) {
-            System.out.print("queue is empty");
-            return null;
+            throw new IllegalStateException("Queue is empty");
         }
+
         T value = (T) array[front];
+        array[front] = null;
         front = (front + 1) % capacity;
         size--;
         return value;
@@ -63,10 +65,11 @@ class circularqueue<T> {
 
     T peek() {
         if (isEmpty()) {
-            System.out.print("queue is empty");
-            return null;
+            throw new IllegalStateException("Queue is empty");
         }
+
         return (T) array[front];
+
     }
 
     int size() {
@@ -77,7 +80,7 @@ class circularqueue<T> {
         return capacity;
     }
 
-    void remove() {
+    void clear() {
 
         while (!isEmpty()) {
             dequeue();
@@ -86,4 +89,14 @@ class circularqueue<T> {
 
     }
 
+    void display() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        for (int i = 0; i < size; i++) {
+            System.out.print(array[(front + i) % capacity]);
+
+        }
+        System.out.println();
+    }
 }
