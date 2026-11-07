@@ -1,14 +1,15 @@
 //enqueue, dequeue, peek, isEmpty, isFull, size, display
+package library.datastructures;
 
-class circularqueue<T> {
-    T array[];
-    int front;
-    int rear = -1;
-    int capacity;
-    int size;
+public class CircularQueue<T> {
+    private T array[];
+    private int front;
+    private int rear = -1;
+    private int capacity;
+    private int size;
 
     @SuppressWarnings("unchecked")
-    circularqueue() {
+    public CircularQueue() {
 
         this.capacity = 10;
 
@@ -17,18 +18,21 @@ class circularqueue<T> {
         this.front = 0;
     }
 
-    boolean isEmpty() {
+    public boolean isEmpty() {
 
         return size == 0;
     }
 
-    boolean isFull() {
+    public boolean isFull() {
 
         return size == capacity;
 
     }
 
-    void enqueue(T data) {
+    public void enqueue(T data) {
+        if(data == null){
+            throw new IllegalArgumentException("Null elements are not allowed!");
+        }
         if (isFull()) {
             resize();
         }
@@ -38,7 +42,8 @@ class circularqueue<T> {
         size++;
     }
 
-    void resize() {
+    @SuppressWarnings("unchecked")
+    private void resize() {
         int newcapacity = capacity * 2;
         T[] newarray = (T[]) new Object[newcapacity];
         for (int i = 0; i < size; i++) {
@@ -51,36 +56,36 @@ class circularqueue<T> {
 
     }
 
-    T dequeue() {
+    public T dequeue() {
         if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
 
-        T value = (T) array[front];
+        T value = array[front];
         array[front] = null;
         front = (front + 1) % capacity;
         size--;
         return value;
     }
 
-    T peek() {
+    public T peek() {
         if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
 
-        return (T) array[front];
+        return array[front];
 
     }
 
-    int size() {
+    public int size() {
         return size;
     }
 
-    int capacity() {
+    public int capacity() {
         return capacity;
     }
 
-    void clear() {
+    public void clear() {
 
         while (!isEmpty()) {
             dequeue();
@@ -89,12 +94,12 @@ class circularqueue<T> {
 
     }
 
-    void display() {
+    public void display() {
         if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
         for (int i = 0; i < size; i++) {
-            System.out.print(array[(front + i) % capacity]);
+            System.out.print(array[(front + i) % capacity] + " ");
 
         }
         System.out.println();
