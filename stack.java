@@ -1,17 +1,19 @@
-class stack<T> {
+package library.datastructures;
+
+public class CustomStack<T> {
     private T array[];
     private int top;
     private int size;
     private int capacity;
 
-    stack(int capacity) {
-        this.capacity = capacity;
+    public CustomStack() {
+        this.capacity = 10;
         array = (T[]) new Object[capacity];
         this.size = 0;
         this.top = -1;
     }
 
-    public boolean isfull() {
+    public boolean isFull() {
         return size == capacity;
     }
 
@@ -20,7 +22,13 @@ class stack<T> {
     }
 
     public void push(T data) {
-        if (isfull()) {
+        if (data == null) {
+
+            throw new IllegalArgumentException("Cannot push null onto the stack");
+
+        }
+
+        if (isFull()) {
             resize();
 
         }
@@ -31,25 +39,51 @@ class stack<T> {
 
     public T pop() {
         if (isEmpty()) {
-            throw new IllegalArgumentException("stack is empty");
-
+            throw new IllegalStateException("stack is empty");
         }
+        T element = array[top];
+        array[top] = null;
+        top--;
         size--;
-        return array[top--];
+        return element;
     }
 
-    public T peak() {
+    public T peek() {
         if (isEmpty()) {
-            throw new IllegalArgumentException("stack is empty");
+            throw new IllegalStateException("stack is empty");
 
         }
         return array[top];
     }
 
-    void resize() {
+    public void clear() {
+        for (int i = top; i >= 0; i--) {
+            array[i] = null;
+        }
+        top = -1;
+        size = 0;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public int capacity() {
+        return capacity;
+    }
+
+    public void display() {
+
+        for (int i = top; i >= 0; i--) {
+            System.out.println(array[i] + " ");
+        }
+
+    }
+
+    private void resize() {
         int newcapacity = capacity * 2;
         T[] newarray = (T[]) new Object[newcapacity];
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < size; i++) {
             newarray[i] = array[i];
 
         }
