@@ -1,3 +1,4 @@
+
 package library.datastructures;
 
 public class CustomStack<T> {
@@ -6,6 +7,7 @@ public class CustomStack<T> {
     private int size;
     private int capacity;
 
+    @SuppressWarnings("unchecked")
     public CustomStack() {
         this.capacity = 10;
         array = (T[]) new Object[capacity];
@@ -23,14 +25,11 @@ public class CustomStack<T> {
 
     public void push(T data) {
         if (data == null) {
-
             throw new IllegalArgumentException("Cannot push null onto the stack");
-
         }
 
         if (isFull()) {
             resize();
-
         }
 
         array[++top] = data;
@@ -51,7 +50,6 @@ public class CustomStack<T> {
     public T peek() {
         if (isEmpty()) {
             throw new IllegalStateException("stack is empty");
-
         }
         return array[top];
     }
@@ -73,23 +71,24 @@ public class CustomStack<T> {
     }
 
     public void display() {
-
-        for (int i = top; i >= 0; i--) {
-            System.out.println(array[i] + " ");
+        if (isEmpty()) {
+            System.out.println("Stack is empty!");
+            return;
         }
 
+        for (int i = top; i >= 0; i--) {
+            System.out.println(array[i]);
+        }
     }
 
+    @SuppressWarnings("unchecked")
     private void resize() {
         int newcapacity = capacity * 2;
         T[] newarray = (T[]) new Object[newcapacity];
         for (int i = 0; i < size; i++) {
             newarray[i] = array[i];
-
         }
         array = newarray;
         capacity = newcapacity;
-
     }
-
 }
