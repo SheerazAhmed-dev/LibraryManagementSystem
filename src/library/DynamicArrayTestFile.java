@@ -1,6 +1,5 @@
 package library;
 import library.datastructures.DynamicArray;
-
 public class DynamicArrayTestFile{
     public static void main(String[] args){
         DynamicArray<Integer> dynamicArray = new DynamicArray<>();

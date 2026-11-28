@@ -1,5 +1,8 @@
 package library.models;
-public class Book{
+import library.interfaces.Displayable;
+import library.interfaces.Searchable;
+
+public class Book implements Displayable,Searchable{
     private String title;
     private String isbn;
     private String author;
@@ -18,6 +21,19 @@ public class Book{
         this.availableCopies = totalCopies;
         this.publicationYear = publicationYear;
         this.totalCopies = totalCopies;   
+    }
+    @Override
+    public boolean matches(String query){
+        if(query == null || query.trim().isEmpty()){
+            return false;
+        }
+        query = query.trim().toLowerCase();
+
+        return title.toLowerCase().contains(query) ||
+           isbn.toLowerCase().contains(query) ||
+           author.toLowerCase().contains(query) ||
+           publisher.toLowerCase().contains(query) ||
+           category.toLowerCase().contains(query);
     }
 
     public String getIsbn(){
@@ -47,8 +63,6 @@ public class Book{
     public int getBorrowedCopies(){
         return totalCopies - availableCopies;
     }
-
-
     public void setTitle(String title){
         this.title = title;
     }
@@ -67,11 +81,11 @@ public class Book{
     public void setTotalCopies(int totalCopies){
         int borrowedCopies = getBorrowedCopies();
 
-        if(totalCopies<borrowedCopies || totalCopies<0){
-            throw new IllegalArgumentException("total can't be less than borrowed copies");
+        if(totalCopies<borrowedCopies || totalCopies<=0){
+            throw new IllegalArgumentException("Invalid total copies");
         }
         this.totalCopies = totalCopies;
-        this.availableCopies = totalCopies - getBorrowedCopies();
+        this.availableCopies = totalCopies - borrowedCopies;
     }
     public void setPublisher(String publisher){
         this.publisher = publisher;

@@ -1,6 +1,4 @@
-
 package library.models;
-
 import java.time.LocalDateTime;
 
 public class ActivityRecord{
@@ -12,12 +10,11 @@ public class ActivityRecord{
     private LocalDateTime timestamp;
 
     public ActivityRecord(String activityId,String activityType,String description,String memberId,String bookIsbn){
-        if(activityId == null || activityId.isBlank() ||
-           activityType == null || activityType.isBlank() ||
-           description == null || description.isBlank()){
+        if(activityId==null || activityId.isBlank() ||
+           activityType==null || activityType.isBlank() ||
+           description==null || description.isBlank()){
             throw new IllegalArgumentException("Invalid activity details");
         }
-
         this.activityId = activityId;
         this.activityType = activityType;
         this.description = description;
@@ -54,8 +51,8 @@ public class ActivityRecord{
         System.out.println("Activity ID: " + activityId);
         System.out.println("Activity Type: " + activityType);
         System.out.println("Description: " + description);
-        System.out.println("Member ID: " + (memberId == null ? "N/A" : memberId));
-        System.out.println("Book ISBN: " + (bookIsbn == null ? "N/A" : bookIsbn));
+        System.out.println("Member ID: " + (memberId==null ? "N/A" : memberId));
+        System.out.println("Book ISBN: " + (bookIsbn==null ? "N/A" : bookIsbn));
         System.out.println("Timestamp: " + timestamp);
     }
 }

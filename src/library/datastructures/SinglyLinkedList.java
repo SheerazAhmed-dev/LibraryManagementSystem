@@ -1,5 +1,4 @@
 package library.datastructures;
-
 public class SinglyLinkedList<T>{
     private static class Node<T>{
         T data;
@@ -10,7 +9,6 @@ public class SinglyLinkedList<T>{
             this.next = null;
         }
     }
-
     private Node<T> head;
     private Node<T> tail;
     private int size;
@@ -39,7 +37,6 @@ public class SinglyLinkedList<T>{
     public void addFirst(T element){
         checkElement(element);
         Node<T> newNode = new Node<>(element);
-
         if(head == null){
             head = newNode;
             tail = newNode;
@@ -54,7 +51,6 @@ public class SinglyLinkedList<T>{
     public void addLast(T element){
         checkElement(element);
         Node<T> newNode = new Node<>(element);
-
         if(head == null){
             head = newNode;
             tail = newNode;
@@ -72,7 +68,6 @@ public class SinglyLinkedList<T>{
         if(index<0 || index>size){
             throw new IndexOutOfBoundsException("Invalid index!");
         }
-
         if(index==0){
             addFirst(element);
             return;
@@ -112,17 +107,14 @@ public class SinglyLinkedList<T>{
         if(head==null){
             throw new IllegalStateException("List is empty!");
         }
-
         if(head==tail){
             return removeFirst();
         }
-    
         T removedElement = tail.data;
         Node<T> temp = head;
         while(temp.next != tail){
             temp = temp.next;
         }
-        
         tail = temp;
         tail.next = null;
         size--;
@@ -135,7 +127,6 @@ public class SinglyLinkedList<T>{
         if(index==0){
             return removeFirst();
         }
-        
         Node<T> temp = head;
         int i=0;
         while(i<index-1){
@@ -144,11 +135,9 @@ public class SinglyLinkedList<T>{
         }
         Node<T> removedNode = temp.next;
         temp.next = removedNode.next;
-
         if(removedNode == tail){
             tail = temp;
         }
-
         size--;
         return removedNode.data;
     }
@@ -168,7 +157,6 @@ public class SinglyLinkedList<T>{
         if(element == null){
             return -1;
         }
-        
         Node<T> temp = head;
         int index = 0;
         while(temp != null){

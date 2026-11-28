@@ -10,7 +10,6 @@ public class HashTable<K, V>{
             this.next = null;
         }
     }
-
     private Node<K, V>[] table;
     private int size;
     private int capacity;
@@ -27,12 +26,11 @@ public class HashTable<K, V>{
     }
 
     public void put(K key, V value){
-        if(value == null || key == null){
+        if(value==null || key==null){
             throw new IllegalArgumentException("Key/value must not be null");
         }
         int index = hash(key);
         Node<K, V> temp = table[index];
-
         while(temp != null){
             if(temp.key.equals(key)){
                 temp.value = value;
@@ -44,14 +42,13 @@ public class HashTable<K, V>{
         newNode.next = table[index];
         table[index] = newNode;
         size++;
-
         if((double)size/capacity>=0.75){
             resize();
         }
     }
 
     public V get(K key){
-        if(key == null){
+        if(key==null){
             throw new IllegalArgumentException("Key must not be null!");
         }
         int index = hash(key);
@@ -66,12 +63,11 @@ public class HashTable<K, V>{
     }
 
     public boolean containsKey(K key){
-        if(key == null){
+        if(key==null){
             throw new IllegalArgumentException("Key must not be null!");
         }
         int index = hash(key);
         Node<K, V> temp = table[index];
-
         while(temp != null){
             if(temp.key.equals(key)){
                 return true;
@@ -82,7 +78,7 @@ public class HashTable<K, V>{
     }
 
     public V remove(K key){
-        if(key == null){
+        if(key==null){
             throw new IllegalArgumentException("Key must not be null!");
         }
         int index = hash(key);
@@ -113,7 +109,6 @@ public class HashTable<K, V>{
         Node<K, V>[] newTable = (Node<K, V>[]) new Node[newCapacity];
         for(int i = 0; i < capacity; i++){
             Node<K, V> temp = table[i];
-
             while(temp != null){
                 Node<K, V> next = temp.next;
                 int index = Math.floorMod(temp.key.hashCode(), newCapacity);
@@ -146,7 +141,7 @@ public class HashTable<K, V>{
     }
 
     public void display(){
-        for(int i = 0; i < capacity; i++){
+        for(int i=0; i<capacity; i++){
             System.out.print("Bucket " + i + ": ");
             Node<K, V> temp = table[i];
             while(temp != null){

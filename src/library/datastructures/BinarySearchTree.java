@@ -14,7 +14,6 @@ public class BinarySearchTree{
             this.title = title;
         }
     }
-
     private Node root;
     private int size;
     private int bookCount;
@@ -28,7 +27,7 @@ public class BinarySearchTree{
     public int size(){
         return size;
     }
-
+    
     public int bookCount(){
         return bookCount;
     }
@@ -59,7 +58,7 @@ public class BinarySearchTree{
         while(true){
             int comp = title.compareToIgnoreCase(temp.title);
 
-            if(comp == 0){
+            if(comp==0){
                 if(temp.isbns.contains(isbn)){
                     return;
                 }
@@ -67,7 +66,7 @@ public class BinarySearchTree{
                 bookCount++;
                 return;
             }
-            if(comp < 0){
+            if(comp<0){
                 if(temp.left == null){
                     temp.left = new Node(title, isbn);
                     size++;
@@ -88,7 +87,7 @@ public class BinarySearchTree{
     }
 
     public SinglyLinkedList<String> search(String title){
-        if(title == null || title.trim().isEmpty()){
+        if(title==null || title.trim().isEmpty()){
             throw new IllegalArgumentException("Enter valid book title, book title cannot be empty!");
         }
 
@@ -104,7 +103,7 @@ public class BinarySearchTree{
     }
 
     public boolean titleExists(String title){
-        if(title == null || title.trim().isEmpty()){
+        if(title==null || title.trim().isEmpty()){
             return false;
         }
         return find(title.trim()) != null;
@@ -114,11 +113,10 @@ public class BinarySearchTree{
         Node temp = root;
         while(temp != null){
             int comp = title.compareToIgnoreCase(temp.title);
-
-            if(comp == 0){
+            if(comp==0){
                 return temp;
             }
-            if(comp < 0){
+            if(comp<0){
                 temp = temp.left;
             }else{
                 temp = temp.right;
@@ -128,13 +126,11 @@ public class BinarySearchTree{
     }
 
     public boolean delete(String title, String isbn){
-        if(title == null || title.trim().isEmpty() || isbn == null || isbn.trim().isEmpty()){
+        if(title==null || title.trim().isEmpty() || isbn==null || isbn.trim().isEmpty()){
             throw new IllegalArgumentException("Title/Isbn invalid!");
         }
-
         Node temp = find(title.trim());
-
-        if(temp == null || !temp.isbns.contains(isbn.trim())){
+        if(temp==null || !temp.isbns.contains(isbn.trim())){
             return false;
         }
 
@@ -150,20 +146,18 @@ public class BinarySearchTree{
     }
 
     public boolean deleteEntireTitle(String title){
-        if(title == null || title.trim().isEmpty()){
+        if(title==null || title.trim().isEmpty()){
             throw new IllegalArgumentException("Book name is invalid!");
         }
 
         Node temp = find(title.trim());
 
-        if(temp == null){
+        if(temp==null){
             return false;
         }
-
         bookCount -= temp.isbns.size();
         root = deleteRecursive(root, title.trim());
         size--;
-
         return true;
     }
 
@@ -171,12 +165,10 @@ public class BinarySearchTree{
         if(node == null){
             return null;
         }
-
         int comp = title.compareToIgnoreCase(node.title);
-
-        if(comp < 0){
+        if(comp<0){
             node.left = deleteRecursive(node.left, title);
-        }else if(comp > 0){
+        }else if(comp>0){
             node.right = deleteRecursive(node.right, title);
         }else{
             if(node.left == null){
@@ -210,7 +202,7 @@ public class BinarySearchTree{
     }
 
     private void inOrder(Node node){
-        if(node == null){
+        if(node==null){
             return;
         }
         inOrder(node.left);
@@ -227,7 +219,7 @@ public class BinarySearchTree{
     }
 
     private void preOrder(Node node){
-        if(node == null){
+        if(node==null){
             return;
         }
         showNode(node);
@@ -244,7 +236,7 @@ public class BinarySearchTree{
     }
 
     private void postOrder(Node node){
-        if(node == null){
+        if(node==null){
             return;
         }
         postOrder(node.left);

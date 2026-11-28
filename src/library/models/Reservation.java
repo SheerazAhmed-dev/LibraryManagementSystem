@@ -1,6 +1,5 @@
 package library.models;
 import java.time.LocalDate;
-
 public class Reservation{
     private String reservationId;
     private Member member;
@@ -10,7 +9,7 @@ public class Reservation{
     private boolean cancelled;
 
     public Reservation(String reservationId, Member member, Book book){
-        if(reservationId == null || reservationId.isBlank() || member == null || book == null){
+        if(reservationId==null || reservationId.isBlank() || member==null || book==null){
             throw new IllegalArgumentException("Invalid reservation details");
         }
         this.reservationId = reservationId;
@@ -20,7 +19,6 @@ public class Reservation{
         this.fulfilled = false;
         this.cancelled = false;
     }
-
     public String getReservationId(){
         return reservationId;
     }
@@ -39,7 +37,6 @@ public class Reservation{
     public boolean isCancelled(){
         return cancelled;
     }
-    
     public void fulfill(){
         if(cancelled || fulfilled){
             throw new IllegalStateException("Reservation is already completed");

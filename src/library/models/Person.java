@@ -1,5 +1,6 @@
 package library.models;
-public abstract class Person{
+import library.interfaces.Displayable;
+public abstract class Person implements Displayable{
     private String name;
     private String id;
     private String phone;
@@ -12,7 +13,6 @@ public abstract class Person{
         this.phone = phone;
     }
     public abstract void displayDetails();
-
     public String getEmail(){
         return email;
     }
@@ -25,7 +25,6 @@ public abstract class Person{
     public String getId(){
         return id;
     }
-
     public void setName(String name){
         this.name = name;
     }
